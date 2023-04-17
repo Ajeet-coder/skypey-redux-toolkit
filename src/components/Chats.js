@@ -11,10 +11,18 @@ function Chats({ activeUserId }) {
     const massge = massages[activeUserId]
 
 
+    const chatref = useRef();
+  const scrollToBottom = () => {
+    chatref.current.scrollTop = chatref.current.scrollHeight;
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  },  [massge]);
 
     //console.log("Massages  "+JSON.stringify(massge), null, 2)
     return (
-        <div className="Chats" >
+        <div className="Chats" ref={chatref} >
             {_.values(massge).map((massage) => (
 
                 <Chat massage={massage} key={massage.number} />
